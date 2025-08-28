@@ -13,11 +13,18 @@ public static class ProductExceptions
             : base("Price must be a non-negative integer.")
         { }
     }
-    
+
     public class NoProductException : Exception
     {
-        public NoProductException() 
-            : base("No product(s) found") 
+        public NoProductException()
+            : base("No product(s) found")
+        { }
+    }
+
+    public class NoProductWithCategory : Exception
+    {
+         public NoProductWithCategory()
+            : base("No products with given category found")
         { }
     }
 }

@@ -18,6 +18,22 @@ public class ProductRepository
         return _products;
     }
 
+    public List<Product> GetAllByCategory(string category)
+    {
+        if (_products.Count == 0)
+            throw new ProductExceptions.NoProductException();
+
+        var productsInCategory = _products
+            .Where(p => p.Category.Equals(category, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (productsInCategory.Count == 0)
+            throw new ProductExceptions.NoProductWithCategory();
+
+        return productsInCategory;
+    }
+
+
     public Product? GetById(int id)
     {
         var product = _products.FirstOrDefault(p => p.Id == id);

@@ -25,6 +25,20 @@ namespace YourNamespace.Controllers
             }
         }
 
+        [HttpGet("category/{category}")]
+        public IActionResult GetAllByCategory(string category){
+            try{
+                var products = _repository.GetAllByCategory(category);
+                return Ok(products);
+            }
+            catch (ProductExceptions.NoProductException ex){
+                return BadRequest(ex.Message);
+            }
+            catch (ProductExceptions.NoProductWithCategory ex){
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id){
             try{
